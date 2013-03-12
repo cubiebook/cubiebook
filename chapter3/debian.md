@@ -3,35 +3,34 @@
 [http://onefishum.blog.163.com/blog/static/5184730520131151385937/](http://one
 fishum.blog.163.com/blog/static/5184730520131151385937/)
 
-
 ### *定义及标准：*
-*
-    1. 所有操作基于ubuntu 12.10 root用户。   
-    2. 所有备注用斜体字体。  
-    3. 用户输入使用下划线。  
-    4. 硬盘至少4G以上的剩余空间。  
-    5. TF卡512M以上  
-    6. 教程制做内核版本为Linux-3.0.62+  
-    7. 默认路径为/root目录。
-*
+
+*1. 所有操作基于ubuntu 12.10 root用户。*   
+*2. 所有备注用斜体字体。*  
+*3. 用户命令输入使用粗斜体。*  
+*4. 硬盘至少4G以上的剩余空间。*  
+*5. TF卡512M以上*  
+*6. 教程制做内核版本为Linux-3.0.62+*  
+*7. 默认路径为/root目录。*
+
 
 ### *更新：*  
-*   1.1版本*  
+*1.1版本*  
 *发现linux分区兼容性。一些杂牌卡，可能分区会有问题，尽量用品牌。此问题为linux下分区软件的问题。本文使用为sandisk的卡。*
 
 
 
 **1．在ubuntu下安装如下软件，主要用于编译源码及基础系统安装**
 
- # <u>apt-get install build-essential u-boot-tools qemu-user-static debootstrapemdebian-archive-keyring git libusb-1.0-0-dev pkg-config</u>  
- # <u>apt-get install gcc-arm-linux-gnueabihf</u> ; pc 交差编译arm 系统。
+ # ***apt-get install build-essential u-boot-tools qemu-user-static debootstrapemdebian-archive-keyring git libusb-1.0-0-dev pkg-config***  
+ # ***apt-get install gcc-arm-linux-gnueabihf*** ; pc 交差编译arm 系统。
 
 **2．制做TF卡**
 
 a. 插上TF卡后  
 查看TF信息
 
- # <u>ls /dev/mmcblk0*</u>  
+ # ***ls /dev/mmcblk0****  
 ```
 /dev/mmcblk0  /dev/mmcblk0p1
 ```
@@ -39,7 +38,7 @@ a. 插上TF卡后
 *注：可能你的显示不是以下信息。但至少有/dev/mmcblk0，说明你的tf已经被系统实别。注意，ubuntu系统默认有TF插入后会自动mount，请弹出不
 要挂载目录，以免无法进行以下操作。*
 
- # <u>dd if=/dev/zero of=/dev/mmcblk0 bs=1M count=1</u>  
+ # ***dd if=/dev/zero of=/dev/mmcblk0 bs=1M count=1***  
 ```
 记录了1+0 的读入
 记录了1+0 的写出
@@ -48,7 +47,7 @@ a. 插上TF卡后
 
 TF卡分区
 
- # <u>sfdisk --in-order -uM /dev/mmcblk0</u>
+ # ***sfdisk --in-order -uM /dev/mmcblk0***
 
 ```
 Checking that no-one is using this disk right now ...
@@ -64,11 +63,11 @@ Input in the following format; absent fields get a default value.
 <start> <size> <type [E,S,L,X,hex]> <bootable [-,*]> <c,h,s> <c,h,s>
 Usually you only need to specify <start> and <size> (and perhaps <type>).
 ```  
-/dev/mmcblk0p1 : <u>1,16,c</u>
+/dev/mmcblk0p1 : ***1,16,c***
 ```
 /dev/mmcblk0p1 1 16 16 16384 c W95 FAT32 (LBA)
 ```  
-/dev/mmcblk0p2 : <u>,,L</u>
+/dev/mmcblk0p2 : ***,,L***
 ```  
 /dev/mmcblk0p2 17 15193- 15177- 15540736 83 Linux
 /dev/mmcblk0p3 :
@@ -97,7 +96,7 @@ to zero the first 512 bytes: dd if=/dev/zero of=/dev/foo7 bs=512 count=1
 
 *注：此步完成后，请执行以下命令，用于确定你的tf卡是否兼容linux的分区软件。*
 
- # <u>fdisk -l /dev/mmcblk0</u>
+ # ***fdisk -l /dev/mmcblk0***
 ```
 Disk /dev/mmcblk0: 15.9 GB, 15931539456 bytes
 4 heads, 16 sectors/track, 486192 cylinders, total 31116288 sectors
@@ -116,13 +115,13 @@ Device Boot Start End Blocks Id System
 *使用berryboot-cubieboard等img文件在windows下刷到TF卡，安装系统完成后。拿到linux下接着往下执行，相当于使用已经分区的卡进行安装。如果哪位对这种无法识别的卡有更好的方法，请告诉我。*
 
 将第一分区格式化成vfat格式  
- # <u>mkfs.vfat /dev/mmcblk0p1</u>  
+ # ***mkfs.vfat /dev/mmcblk0p1***  
 ```
 mkfs.vfat 3.0.13 (30 Jun 2012)
 ```
 
 将第二分区格式化成ext4格式，看你的卡的容量，可能要稍等一会儿。  
- # <u>mkfs.ext4 /dev/mmcblk0p2</u> 
+ # ***mkfs.ext4 /dev/mmcblk0p2*** 
 ``` 
 mke2fs 1.42.5 (29-Jul-2012)
 Discarding device blocks: 完成
@@ -145,17 +144,14 @@ Allocating group tables: 完成
 正在写入inode表: 完成
 Creating journal (32768 blocks): 完成
 Writing superblocks and filesystem accounting information: 完成
-```
+```  
 
-**3．建立引导 **
+**3. 建立引导**
 
- # <u>git clone https://github.com/linux-sunxi/u-boot-sunxi.git</u>
-
- # <u>cd u-boot-sunxi/</u>
-
- # <u>make distclean CROSS_COMPILE=arm-linux-gnueabihf-</u>
-
- # <u>make cubieboard CROSS_COMPILE=arm-linux-gnueabihf-</u>
+ # ***git clone https://github.com/linux-sunxi/u-boot-sunxi.git***  
+ # ***cd u-boot-sunxi/***  
+ # ***make distclean CROSS_COMPILE=arm-linux-gnueabihf-***  
+ # ***make cubieboard CROSS_COMPILE=arm-linux-gnueabihf-***
 ```
 …………
 …………
@@ -169,14 +165,14 @@ make[2]:正在离开目录 `/root/cubieboard/u-boot-sunxi/examples/api'
 make[1]:正在离开目录 `/root/cubieboard/u-boot-sunxi'
 ```
 
- # <u>dd if=spl/sunxi-spl.bin of=/dev/mmcblk0 bs=1024 seek=8</u>
+ # ***dd if=spl/sunxi-spl.bin of=/dev/mmcblk0 bs=1024 seek=8***
 ```
 记录了20+0 的读入
 记录了20+0 的写出
 20480字节(20 kB)已复制，0.0129492 秒，1.6 MB/秒
 ```
 
- # <u>dd if=u-boot.bin of=/dev/mmcblk0 bs=1024 seek=32</u>
+ # ***dd if=u-boot.bin of=/dev/mmcblk0 bs=1024 seek=32***
 ```
 记录了168+1 的读入
 记录了168+1 的写出
@@ -184,20 +180,20 @@ make[1]:正在离开目录 `/root/cubieboard/u-boot-sunxi'
 ```
 
 
- # <u>cd ..</u>
+ # ***cd ..***
 
 
 **4．编译内核**
 
 下载内核源码，如果通过git下载可能时间较长。
 
- # <u>git clone git://github.com/linux-sunxi/linux-sunxi.git</u>
+ # ***git clone git://github.com/linux-sunxi/linux-sunxi.git***
 
- # <u>cd linux-sunxi/</u>
+ # ***cd linux-sunxi/***
 
 使用sun4i的默认配置*（第一次编译时使用）*
 
- # <u>make ARCH=arm sun4i_defconfig</u>
+ # ***make ARCH=arm sun4i_defconfig***
 ```
 #
 # configuration written to .config
@@ -206,7 +202,7 @@ make[1]:正在离开目录 `/root/cubieboard/u-boot-sunxi'
 
 读取老的配置文件*（非第一次编译时使用，用于更改内核配置）*
 
- # <u>make ARCH=arm oldconfig</u>
+ # ***make ARCH=arm oldconfig***
 ```
 scripts/kconfig/conf --oldconfig Kconfig
 #
@@ -216,7 +212,7 @@ scripts/kconfig/conf --oldconfig Kconfig
 
 选择内核编译配置（根据个自的情况而定，选择完成后*保存*）
 
- # <u>make ARCH=arm menuconfig</u>
+ # ***make ARCH=arm menuconfig***
 ```
 scripts/kconfig/mconf Kconfig
 #
@@ -229,7 +225,7 @@ scripts/kconfig/mconf Kconfig
 ```
 编译内核，时间较长，请耐心等待
 
- # <u>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- uImage</u>
+ # ***make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- uImage***
 ```
 scripts/kconfig/conf --silentoldconfig Kconfig
 ………………
@@ -242,10 +238,10 @@ Load Address: 40008000
 Entry Point: 40008000
 Image arch/arm/boot/uImage is ready
 ```
-*注：请确认编译无误。正确应该看到Image arch/arm/boot/uImage is ready。否则请根据提示再执行# <u>make ARCH=arm menuconfig</u>; # <u>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- uImage</u>直至正确。一些选项可能造成编译无法编译通过，可以如果不是重要功能可以取消或与维护者联系。*
+*注：请确认编译无误。正确应该看到Image arch/arm/boot/uImage is ready。否则请根据提示再执行# ***make ARCH=arm menuconfig***; # ***make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- uImage***直至正确。一些选项可能造成编译无法编译通过，可以如果不是重要功能可以取消或与维护者联系。*
 
 
- # <u>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- modules</u>
+ # ***make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- modules***
 ```
 CHK include/linux/version.h
 ………………
@@ -253,16 +249,16 @@ CHK include/linux/version.h
 LD [M] net/ipv6/xfrm6_mode_tunnel.ko
 ```
 *注：以上结果，因每个人选择不同结果不同，只是举例，请勿以此为结果。*  
-*请确保编译无误，正确应该看到类似LD [M] XXXX/XXXX/XXX.ko。否则请根据提示再执行# <u>make ARCH=arm menuconfig</u>;# <u>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- uImage </u>; # <u>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- modules</u>直至正确。一些选项可能造成编译无法编译通过，可以如果不是重要功能可以取消或与维护者联系。*
+*请确保编译无误，正确应该看到类似LD [M] XXXX/XXXX/XXX.ko。否则请根据提示再执行# ***make ARCH=arm menuconfig***;# ***make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- uImage ***; # ***make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- modules***直至正确。一些选项可能造成编译无法编译通过，可以如果不是重要功能可以取消或与维护者联系。*
 
- # <u>cd ..</u>
+ # ***cd ..***
 
 **5．制做script.bin**
 
- # <u>git clone https://github.com/linux-sunxi/sunxi-
-tools.git</u>  
- # <u>cd sunxi-tools/</u>  
- # <u>make</u>  
+ # ***git clone https://github.com/linux-sunxi/sunxi-
+tools.git***  
+ # ***cd sunxi-tools/***  
+ # ***make***  
 ```
 gcc -g -O0 -Wall -Wextra -std=c99 -D_POSIX_C_SOURCE=200112L -Iinclude/ -o fexc fexc.c script.c script_uboot.c script_bin.c script_fex.c
 ln -s fexc bin2fex
@@ -278,33 +274,33 @@ gcc -g -O0 -Wall -Wextra -std=c99 -D_POSIX_C_SOURCE=200112L -Iinclude/ -o nand-p
 ```
 得到 fex2bin 文件，这个是能把 *.fex 文件生成 *.bin文件。
 
- # <u>cd ..</u>
+ # ***cd ..***
 
 
- # <u>git clone https://github.com/linux-sunxi/sunxi-
-boards.git</u>  
- # <u>cd sunxi-boards/sys_config/a10/</u>  
+ # ***git clone https://github.com/linux-sunxi/sunxi-
+boards.git***  
+ # ***cd sunxi-boards/sys_config/a10/***  
 在 sys_config/a10 目录下，我们能找到 cubieboard.fex 文件，这就是我们需要的。
 
 通过编译cubieboard.fex，得到 script.bin  
- # <u>../../../sunxi-tools/fex2bin cubieboard.fex script.bin</u>
+ # ***../../../sunxi-tools/fex2bin cubieboard.fex script.bin***
 
 
 **6．建立引导**
 
 建立引导区挂载点 *（注，此时应在a10#目录下，主要为了拷贝方便）*
 
- # <u>mkdir -p /mnt/1</u>  
- # <u>mkdir -p /mnt/2</u>  
- # <u>mount /dev/mmcblk0p1 /mnt/1</u>  
- # <u>mount /dev/mmcblk0p2 /mnt/2</u>  
+ # ***mkdir -p /mnt/1***  
+ # ***mkdir -p /mnt/2***  
+ # ***mount /dev/mmcblk0p1 /mnt/1***  
+ # ***mount /dev/mmcblk0p2 /mnt/2***  
 
- # <u>cp script.bin /mnt/1/</u>
+ # ***cp script.bin /mnt/1/***
 
 进入内核目录
 
- # <u>cd ../../../linux-sunxi/</u>  
- # <u>cp arch/arm/boot/uImage /mnt/1/</u>
+ # ***cd ../../../linux-sunxi/***  
+ # ***cp arch/arm/boot/uImage /mnt/1/***
 
 **7．建立rootfs**
 
@@ -322,8 +318,8 @@ boards.git</u>
 以下是我找的一个国内的debian arm的国内源，发现国内的一些源并不提供arm的源。即使如此，也是需要一点时间的，耐心等吧。
 
 
- # <u>debootstrap --arch=armhf --variant=buildd --foreign wheezy /mnt/2/
-[http://ftp.cn.debian.org/debian](http://ftp.cn.debian.org/debian)</u>
+ # ***debootstrap --arch=armhf --variant=buildd --foreign wheezy /mnt/2/
+[http://ftp.cn.debian.org/debian](http://ftp.cn.debian.org/debian)***
 ```
 ………………
 ………………
@@ -332,7 +328,7 @@ I: Extracting xz-utils...
 I: Extracting zlib1g...
 ```
  
- # <u>ls /mnt/2</u>
+ # ***ls /mnt/2***
 ```
 bin debootstrap etc lib mnt root sbin sys usr
 boot dev home lost+found proc run selinux tmp var
@@ -342,14 +338,14 @@ boot dev home lost+found proc run selinux tmp var
 
 拷贝arm的仿真环境
 
- # <u>cp /usr/bin/qemu-arm-static /mnt/2/usr/bin/</u>  
- # <u>chroot /mnt/2/</u>
+ # ***cp /usr/bin/qemu-arm-static /mnt/2/usr/bin/***  
+ # ***chroot /mnt/2/***
 
 此时你将看到，你的提示符，前面已经加上I have no name!。
 
 安装核心包
 
- # <u>/debootstrap/debootstrap --second-stage</u>
+ # ***/debootstrap/debootstrap --second-stage***
 ```
 I: Installing core packages...
 ………………
@@ -359,7 +355,7 @@ I: Base system installed successfully.
 这是啥，呵呵，你成功安装了最简系统。  
 
 接下来，可能是你容易忽略的一件事。更改你超级用户（root）的密码。  
- # <u>chroot . passwd</u>
+ # ***chroot . passwd***
 ```
 Enter new UNIX password:
 Retype new UNIX password:
@@ -367,7 +363,7 @@ passwd: password updated successfully
 ```
 输入两遍一样的密码。方便的话能告诉我一下嘛。呵呵。。。
 
- # <u>exit</u>
+ # ***exit***
 
 执行上面命令回到我们现实PC中。为什么呢。最小系统里工具比较少，折腾麻烦。而且我们还有工作没有做完。接着来。
 
@@ -377,7 +373,7 @@ passwd: password updated successfully
 
 **8．系统模块的安装**
 
- # <u>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=/mnt/2/ modules_install </u>
+ # ***make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=/mnt/2/ modules_install ***
 ```
 ......
 ......
@@ -386,15 +382,15 @@ DEPMOD 3.0.62+
 
 到此为止，你的系统，基本是安装完了。还需要最后一步。告诉系统，你的rootfs的位置。
 
- # <u>cd /mnt/1</u>  
- # <u>cat <<EOT > boot.cmd</u>  
-    > <u>setenv bootargs console=ttyS0,115200 root=/dev/mmcblk0p2 rootwait panic=10 ${extra}</u>  
-    > <u>fatload mmc 0 0x43000000 script.bin</u>  
-    > <u>fatload mmc 0 0x48000000 uImage</u>  
-    > <u>bootm 0x48000000</u>  
-    > <u>EOT</u>
+ # ***cd /mnt/1***  
+ # ***cat <<EOT > boot.cmd***  
+    > ***setenv bootargs console=ttyS0,115200 root=/dev/mmcblk0p2 rootwait panic=10 ${extra}***  
+    > ***fatload mmc 0 0x43000000 script.bin***  
+    > ***fatload mmc 0 0x48000000 uImage***  
+    > ***bootm 0x48000000***  
+    > ***EOT***
 
- # <u>mkimage -C none -A arm -T script -d boot.cmd boot.scr</u>
+ # ***mkimage -C none -A arm -T script -d boot.cmd boot.scr***
 ```
 Image Name:
 Created: Fri Feb 15 00:40:09 2013
@@ -408,25 +404,25 @@ Image 0: 161 Bytes = 0.16 kB = 0.00 MB
 
 **9．编辑inittab及fstab文件**
 
- # <u>cd /mnt/2/etc/</u>  
- # <u>cat <<EOT >> inittab</u>  
-    > <u>T0:2345:respawn:/sbin/getty -L ttyS0 115200 linux</u>  
-    > <u>EOT</u>
+ # ***cd /mnt/2/etc/***  
+ # ***cat <<EOT >> inittab***  
+    > ***T0:2345:respawn:/sbin/getty -L ttyS0 115200 linux***  
+    > ***EOT***
 
 
- # <u>cat <<EOT >> fstab</u>  
-    > <u>proc            /proc           proc    defaults          0       0</u>  
-    > <u>/dev/mmcblk0p1  /boot           vfat    defaults          0       2</u>  
-    > <u>/dev/mmcblk0p2  /               ext4    defaults,noatime  0       1</u>
-    > <u>EOT</u>
+ # ***cat <<EOT >> fstab***  
+    > ***proc            /proc           proc    defaults          0       0***  
+    > ***/dev/mmcblk0p1  /boot           vfat    defaults          0       2***  
+    > ***/dev/mmcblk0p2  /               ext4    defaults,noatime  0       1***
+    > ***EOT***
 
 OK，整个系统制做完毕了。取卡。。。。
 
 再取卡前，请先执行以下命令。
 
- # <u>cd</u>  
- # <u>umount /mnt/1</u>  
- # <u>umount /mnt/2</u>
+ # ***cd***  
+ # ***umount /mnt/1***  
+ # ***umount /mnt/2***
 
 否则，你可能见到难见的黑屏。。。系统崩溃。。。
 
@@ -447,18 +443,18 @@ fishum.blog.163.com/blog/static/5184730520131151385937/)上试试了。此方式
 
 连上usb转ttl线后。（linux对USB转ttl线，一般是带有驱动的，你可以不用装了（还是linux方便吧。））
 
- # <u>ls /dev/ttyUSB*</u>
+ # ***ls /dev/ttyUSB****
 ```
 /dev/ttyUSB0
 ```
 
 看一下是否有USB0或1之类的，如上例你可以用screen 命令连接。如果机器上没有。
 
- # <u>apt-get install screen</u>
+ # ***apt-get install screen***
 
 安装一下就行了。
 
- # <u>screen /dev/ttyUSB0 11520</u>
+ # ***screen /dev/ttyUSB0 11520***
 
 即可。但你现在可能什么都看不到。因为cubieboard开机是自动启动的。你的程序已经启动。按一下回车。或长按电源键(10秒)重启试试。
 
