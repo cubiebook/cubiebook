@@ -1,12 +1,23 @@
-cubiebook
-=========
+CUBIEBOOK - The missing cubieboard manual
+=========================================
 
-cubiebook - The missing cubieboard manual
+CUBIEBOOK
 
-1. 遇见cubieboard
+* [前言](chapter0/README.md)
+	cubieboard的故事
 
-2. 使用cubieboard的android系统
+* [Chapter1：遇见cubieboard](chapter1/README.md)
+	介绍cubieboard的硬件组成和接口情况
+	如何开始使用cubieboard
+	如何给cubieboard恢复系统/刷机
 
-3. 给cubieboard安装Linux
+* [Chapter2：使用cubieboard](chapter2/README.md)
+	用cubieboard把电视变成android TV
+	使用XBMC for Android媒体中心
+	给cubieboard安装Linux
 
-4. cubieboard硬件hack
+* [Chapter3：把cubieboard当作开发平台](chapter3/README.md)
+	
+
+* [Chapter4：cubieboard硬件hack](chapter3/README.md)
+
