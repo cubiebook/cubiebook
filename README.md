@@ -3,6 +3,8 @@ CUBIEBOOK - The missing cubieboard manual
 
 CUBIEBOOK
 
+* [版权声明](copyright.md)
+
 * [前言](chapter0/README.md)
 
 	cubieboard的故事
