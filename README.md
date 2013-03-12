@@ -22,6 +22,8 @@ CUBIEBOOK
 	使用XBMC for Android媒体中心
 
 	给cubieboard安装Linux
+	
+	一步步安装CubieBoard最小系统(debian)
 
 * [Chapter3：把cubieboard当作开发平台](chapter3/README.md)
 	
