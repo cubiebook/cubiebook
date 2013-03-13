@@ -1,4 +1,4 @@
-<CENTER> 安装CubieBoard最小系统 v1.1</CENTER>
+<CENTER> 从头构建cubieboard Debian系统 </CENTER>
 =============================================
 [http://onefishum.blog.163.com/blog/static/5184730520131151385937/](http://one
 fishum.blog.163.com/blog/static/5184730520131151385937/)
@@ -32,7 +32,7 @@ a. 插上TF卡后
 
  # ***ls /dev/mmcblk0****  
 ```
-/dev/mmcblk0  /dev/mmcblk0p1
+/dev/mmcblk0  /dev/mmcblk0p1
 ```
 
 *注：可能你的显示不是以下信息。但至少有/dev/mmcblk0，说明你的tf已经被系统实别。注意，ubuntu系统默认有TF插入后会自动mount，请弹出不
@@ -272,7 +272,7 @@ pio.c: 在函数‘do_command’中:
 pio.c:313:57: 警告： 未使用的参数‘argc’ [-Wunused-parameter]
 gcc -g -O0 -Wall -Wextra -std=c99 -D_POSIX_C_SOURCE=200112L -Iinclude/ -o nand-part nand-part.c
 ```
-得到 fex2bin 文件，这个是能把 *.fex 文件生成 *.bin文件。
+得到 fex2bin 文件，这个是能把 *.fex 文件生成 *.bin文件。
 
  # ***cd ..***
 
@@ -280,9 +280,9 @@ gcc -g -O0 -Wall -Wextra -std=c99 -D_POSIX_C_SOURCE=200112L -Iinclude/ -o nand-p
  # ***git clone https://github.com/linux-sunxi/sunxi-
 boards.git***  
  # ***cd sunxi-boards/sys_config/a10/***  
-在 sys_config/a10 目录下，我们能找到 cubieboard.fex 文件，这就是我们需要的。
+在 sys_config/a10 目录下，我们能找到 cubieboard.fex 文件，这就是我们需要的。
 
-通过编译cubieboard.fex，得到 script.bin  
+通过编译cubieboard.fex，得到 script.bin  
  # ***../../../sunxi-tools/fex2bin cubieboard.fex script.bin***
 
 
@@ -411,9 +411,9 @@ Image 0: 161 Bytes = 0.16 kB = 0.00 MB
 
 
  # ***cat <<EOT >> fstab***  
-    > ***proc            /proc           proc    defaults          0       0***  
-    > ***/dev/mmcblk0p1  /boot           vfat    defaults          0       2***  
-    > ***/dev/mmcblk0p2  /               ext4    defaults,noatime  0       1***
+    > ***proc            /proc           proc    defaults          0       0***  
+    > ***/dev/mmcblk0p1  /boot           vfat    defaults          0       2***  
+    > ***/dev/mmcblk0p2  /               ext4    defaults,noatime  0       1***
     > ***EOT***
 
 OK，整个系统制做完毕了。取卡。。。。
@@ -474,9 +474,3 @@ Password:
 [http://linux-sunxi.org/Bootable_SD_card](http://linux-sunxi.org/Bootable_SD_card)  
 [http://linux-sunxi.org/FirstSteps](http://linux-sunxi.org/FirstSteps)  
 [http://linux-sunxi.org/BuildingOnDebian](http://linux-sunxi.org/BuildingOnDebian)
-
-
-**本文使用wps for linux编辑，感谢wps对linux的支持。**
-
-**并感谢淘宝店主 [开心cqy](http://rate.taobao.com/user-rate-835e08d3e35c612423f9a61b3fafabca.htm) [http://trade.taobao.com/trade/detail/tradeSnap.htm?spm=a1z09.2.9.8.9bW9i7&tradeID=193720229754612](http://trade.taobao.com/trade/detail/tradeSnap.htm?spm=a1z09.2.9.8.9bW9i7&tradeID=193720229754612)没他的支持，春节前是拿不到CB的。**
-
