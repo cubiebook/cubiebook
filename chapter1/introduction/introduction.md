@@ -5,7 +5,10 @@ CUBIEBOOK - The missing cubieboard manual
 
 ## cubieboard的硬件组成和接口情况
 
-cubieboard的尺寸只有6x10厘米，但是从计算机的角度讲，它是一个完整功能的计算机。你可以认为cubieboard就是一个电脑主板，在主板上有处理器，有内存，有存储设备等等，和一般的电脑主机相比，它差的就是一个机箱。在性能上，cubieboard可以和90年代的PC媲美，不得不让人感叹半导体技术的进步。下面我们就来认识一下cubieboard上面各个部分。
+* cubieboard的尺寸：6x10厘米，它是一个完整功能的计算机。
+* 在性能上，cubieboard可以和上世纪90年代的PC媲美（CPU性能大致相当于中档Intel Pentium III）
+
+下面介绍一下cubieboard上面各个部分。
 
 ![CUBIEBOARD](top.png)
 
@@ -13,8 +16,23 @@ cubieboard的尺寸只有6x10厘米，但是从计算机的角度讲，它是一
 
 * 内存 - 不同于PC，cubieboard上的内存是不能插拔和替换的(因为体积小)，是直接焊在电路板上面的。cubieboard有两种内存规格512MB和1GB的，用户都倾向于买1GB内存的，所以现在512MB内存的cubieboard很少生产了。
 
+![CUBIEBOARD](cubie_on_working_0909.JPG)
+一个正在工作中的cubieboard
+
+
 ![CUBIEBOARD](hdmi.png)
 
-* 电源插座 - cubieboard的电源输入电压是5V，电流根据系统不同负载(CPU是否忙，是否接入多个USB设备)
-* 电源键 - 
-* HDMI接口 - 
+* 电源插座 - cubieboard的电源输入电压是5V，建议使用1A的电源适配器
+    * 如果不打算使用板载电源对SATA硬盘供电，500mA也可以满足要求
+* 电源键
+    * 长按进行关闭、重新打开
+* HDMI接口
+    * 接泊具有HDMI输入的电视机或显示器
+
+![CUBIE](cubie_right_side_0909.JPG)
+cubieboard的一个侧面
+
+* 以太网卡
+* USB OTG
+* FEL
+* 模拟音频输入、输出
