@@ -13,7 +13,7 @@ CUBIEBOOK - The missing cubieboard manual
     * SATA （接泊硬盘）
     * HDMI （接泊显示器、电视机）
     * NAND 4GB （可存储操作系统、引导系统或保存数据）
-	* DDR3 1GB （可保持系统为冯-诺兼容）
+    * DDR3 1GB （可保持系统为冯-诺兼容）
     * TF   （可存储操作系统、引导系统或保存数据）
     * USB Host * 2 (可插入USB设备)
     * USB OTG     （可以作为USB Doget或者通过LiveSuit刷写板载NAND）
