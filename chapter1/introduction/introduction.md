@@ -16,10 +16,6 @@ CUBIEBOOK - The missing cubieboard manual
 
 * 内存 - 不同于PC，cubieboard上的内存是不能插拔和替换的(因为体积小)，是直接焊在电路板上面的。cubieboard有两种内存规格512MB和1GB的，用户都倾向于买1GB内存的，所以现在512MB内存的cubieboard很少生产了。
 
-![CUBIEBOARD](cubie_on_working_0909.JPG)
-一个正在工作中的cubieboard
-
-
 ![CUBIEBOARD](hdmi.png)
 
 * 电源插座 - cubieboard的电源输入电压是5V，建议使用1A的电源适配器
@@ -29,8 +25,14 @@ CUBIEBOOK - The missing cubieboard manual
 * HDMI接口
     * 接泊具有HDMI输入的电视机或显示器
 
-![CUBIE](cubie_right_side_0909.JPG)
+
+
+这是一个正在工作中的cubieboard
+![CUBIEBOARD](cubie_on_working_0909.JPG)
+
+
 cubieboard的一个侧面
+![CUBIE](cubie_right_side_0909.JPG)
 
 * 以太网卡
 * USB OTG
