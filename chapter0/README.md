@@ -4,6 +4,24 @@ CUBIEBOOK - The missing cubieboard manual
 
 # 前言
 
+
+Cubieboard is a small (10x6cm), hacker friendly, extendable and very low-cost while powerful ARM board with Allwinner A10 SoC
+## 一句话介绍cubieboard
+* cubieboard是一款基于ARM Cortex A8的开发板
+* cubieboard可以运行LinuX和Android
+* cubieboard相对开放（包括内核源代码，原理图）， 黑客友好
+* cubieboard以排针的形式暴露出了96++个GPIO，可以扩展IO，LCD, CSI摄像头，SD卡，SPI，I2C，串口等
+* cubieboard板载
+** SATA （接泊硬盘）
+** HDMI （接泊显示器、电视机）
+** NAND （可存储操作系统、引导系统或保存数据）
+** TF   （可存储操作系统、引导系统或保存数据）
+** USB Host * 2 (可插入USB设备)
+** USB OTG     （可以作为USB Doget或者通过LiveSuit刷写板载NAND）
+** AUDIO in/out （分别可以插入耳机或者话筒）
+** Ethernet    （可以插入网线看视频）
+
+
 ## cubieboard的介绍
 
 
