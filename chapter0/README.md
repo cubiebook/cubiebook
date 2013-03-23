@@ -21,7 +21,7 @@ CUBIEBOOK - The missing cubieboard manual
     * Ethernet    （可以插入网线看视频）
 * cubieboard可以硬件解码2160p的视频 （not full function now）
 * cubieboard的GPU为ARM Mali 400
-* cubieboard
+
 
 ## cubieboard的介绍
 

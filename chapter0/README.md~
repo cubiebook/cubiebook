@@ -19,7 +19,6 @@ CUBIEBOOK - The missing cubieboard manual
     * USB OTG     （可以作为USB Doget或者通过LiveSuit刷写板载NAND）
     * AUDIO in/out （分别可以插入耳机或者话筒）
     * Ethernet    （可以插入网线看视频）
-	* 
 * cubieboard可以硬件解码2160p的视频 （not full function now）
 * cubieboard的GPU为ARM Mali 400
 * cubieboard
