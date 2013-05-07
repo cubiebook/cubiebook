@@ -27,5 +27,7 @@ CUBIEBOOK - The missing cubieboard manual
 	
 	[从头构建CubieBoard Debian系统](chapter3/debian/debian.md)
 
+	[使用buildroot构建自己的linux系统](chapter3/linux/buildroot.md)
+
 * [Chapter4：cubieboard硬件hack](chapter3/README.md)
 
