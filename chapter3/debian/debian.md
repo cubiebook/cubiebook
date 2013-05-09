@@ -1,7 +1,6 @@
 <CENTER> 从头构建cubieboard Debian系统 </CENTER>
 =============================================
-[http://onefishum.blog.163.com/blog/static/5184730520131151385937/](http://one
-fishum.blog.163.com/blog/static/5184730520131151385937/)
+[http://onefishum.blog.163.com/blog/static/5184730520131151385937/](http://onefishum.blog.163.com/blog/static/5184730520131151385937/)
 
 ### *定义及标准：*
 
