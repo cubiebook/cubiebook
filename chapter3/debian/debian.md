@@ -373,7 +373,7 @@ passwd: password updated successfully
 
 **8．系统模块的安装**
 
- # ***make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=/mnt/2/ modules_install ***
+ # ***make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- INSTALL_MOD_PATH=/mnt/2/ modules_install***
 ```
 ......
 ......
