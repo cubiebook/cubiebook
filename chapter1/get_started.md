@@ -33,7 +33,7 @@
 ### 2. 从终端接收开发板数据
 
         下载并安装 XShell 或 Putty 等支持连接终端的软件。  
-        新建连接，调整协议为SERIAL(串口)，并设置PORT(连接对象)为非COM1的那个口。调整至能成功建立连接。  
+        新建连接，调整协议为SERIAL(串口)，并设置PORT(连接对象)为非COM1的那个口，Baud Rate(波特率)设为115200。调整至能成功建立连接。  
         加电并启动开发板，终端窗口得到大量输出，最终获得一个能够输入的Shell。
 
 
@@ -62,6 +62,7 @@
 
         #配置默认终端
 >        vi /etc/passwd
+
         将 fy:x:1001:1002::/home/fy:/bin/sh 末尾修改为 /bin/bash
 
 ### 2. 网络  
@@ -114,6 +115,8 @@ iface lo inet loopback
 >        #apt-get install python
 >        apt-get install python-tornado 
 >        apt-get install sqlite3 
+>        apt-get install htop  
+>        apt-get install tmux  
 >        apt-get install ack-grep
 >        
 
@@ -240,7 +243,7 @@ vi /etc/hosts
 
 ### 0. 何为 Cubian，又为何推荐
 
-        [关于 Cubian](https://github.com/cubieplayer/Cubian)
+>[关于 Cubian](https://github.com/cubieplayer/Cubian)
 
         这个系统吸引我之处在于其干净整洁，对我来说我可以随便折腾，把它弄成我想要弄成的样子，这非常好。  
 
@@ -255,7 +258,7 @@ vi /etc/hosts
 
         首先下载镜像，截止我写文章有三个版本：r1 r2 r3，直取r3即可。  
 
-        [下载地址](http://cubieplayer.github.io/Cubian/dist/)  
+>[下载地址](http://cubieplayer.github.io/Cubian/dist/)  
 
         然后安装 win32diskimager 按上面教的步骤把系统刷进sd卡。  
 
