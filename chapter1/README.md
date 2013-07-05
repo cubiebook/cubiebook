@@ -10,6 +10,8 @@ CUBIEBOOK - The missing cubieboard manual
 
 * [介绍cubieboard的硬件组成和接口情况](introduction/introduction.md)
 
-* [如何开始使用cubieboard](get_started/get_started.md)
+* [cubieboard基础指南](get_started.md)
 
-* [如何给cubieboard恢复系统/刷机](update/update.md)
+* [如何开始使用cubieboard (未完成)](get_started/get_started.md)
+
+* [如何给cubieboard恢复系统/刷机 (未完成)](update/update.md)
