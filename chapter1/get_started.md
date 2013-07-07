@@ -1,4 +1,3 @@
-
 #cubieboard 基础指南
 
 **作者: fy**
@@ -21,7 +20,7 @@
         此时不必加电开机。先将TTL线插到板子上，对应关系如下：
 
         Cable             Pin on Cubieboard  
-        PIN1(红色)            TX  
+        PIN1(白色)            TX  
         PIN2(绿色)            RX  
         GROUND (黑色)         GND  
   
@@ -113,10 +112,14 @@ iface lo inet loopback
         #个人向的软件安装列表，看看就好  
 >        apt-get install vim
 >        #apt-get install python
->        apt-get install python-tornado 
+>        apt-get install python-tornado  
+>        apt-get install python-mako  
+>        apt-get install git  
+>        apt-get install mercurial  
 >        apt-get install sqlite3 
 >        apt-get install htop  
 >        apt-get install tmux  
+>        apt-get install lrzsz  
 >        apt-get install ack-grep
 >        
 
